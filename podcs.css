@@ -1,0 +1,127 @@
+/* google fonts */
+@import url('https://fonts.googleapis.com/css2?family=Ubuntu+Condensed&family=Ubuntu+Mono:ital@1&display=swap');
+
+
+body{
+    background-color: blanchedalmond;
+}
+*{
+    margin: 0;
+    padding: 0;
+}
+nav{
+    font-family: 'Ubuntu Condenced',sans-serif;
+}
+nav ul{
+    list-style: none;
+    background: black;
+    color: white;
+    align-items: center;
+    height: 75px;
+    display: flex;
+    padding: 0 12px;
+}
+nav ul li{
+    padding: 0 16px;
+}
+.brand img{
+    align-items: center;
+    width: 47px;
+}
+.brand{
+    display: flex;
+    align-items: center;
+    font-weight: bolder;
+    font-size: 20px;
+}
+.container{
+    min-height: 75vh;
+    background-color: black;
+    color: white;
+    font-family: 'Ubuntu Condenced',sans-serif;
+    display: flex;
+    margin: 20px auto;
+    width: 70%;
+    border-radius: 10px;
+    padding: 20px;
+    background-image: url('c16.jpg') ;
+    background-size: cover;
+    background-repeat: no-repeat;
+    image-rendering: pixelated;
+}
+.bottom{
+    position: sticky;
+    display: flex;
+    background-color: black;
+    align-items: center;
+    bottom: 0;
+    color: white;
+    height: 150px;
+    height: 100px;
+    justify-content: center;
+    flex-direction: column;
+    margin: 12px 0;
+}
+#idMybar{
+    width: 80vw;
+    cursor: pointer;
+}
+.icons{
+    margin-top: 12px;
+    margin-bottom: 10px;
+}
+.icons i{
+    cursor: pointer;
+}
+
+.sitem{
+    height: 60px;
+    display: flex;
+    background-color: white;
+    width: 135%;
+    color: black;
+    margin: 0 12px;
+    justify-content: space-between;
+    align-items: center;
+    border-radius: 30px;
+    margin-bottom: 20px;
+}
+
+.sitem img{
+    width: 40px;
+    margin: 0 25px;
+    border-radius: 30px;
+}
+.sitem i{
+    cursor: pointer;
+}
+.timestamp{
+    margin: 20px;
+    padding: 25px;
+    cursor: pointer;
+}
+.timestamp i{
+    cursor: pointer;
+}
+
+.songcontainer{
+    margin-top: 74px;
+}
+
+.songinfo{
+    position: absolute;
+    left: 10vw;
+    font-family: 'Ubuntu Condenced',sans-serif;
+    font-size: 20px;
+}
+.songinfo img{
+    opacity: 0;
+    transition: opacity 0.5s ease-in;
+}
+
+/* screening */
+@media only screen and (max-width: 1100px){
+    body{
+        background-color: lightblue;
+    }
+}

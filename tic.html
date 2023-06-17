@@ -1,0 +1,192 @@
+<head>
+<style>
+body{  
+      background-image: url('tici.png');
+      background-size: cover;
+      background-repeat: no-repeat;   
+      image-rendering: pixelated;  
+      color:#db1963;   
+      font-family: 'Quicksand', serif;  
+      text-align: center;  
+      
+ }  
+ h1{font-size: 600%;}  
+ #container {  
+      margin: 5% auto;  
+      border-radius:5px; -webkit-border-radius:5px; -moz-border-radius:5px;  
+      text-align: center;  
+ }  
+ .box{  
+      display: inline-block;  
+      border: 3px solid #000057;  
+      width: 150px;  
+      height:150px;  
+      text-align: center;  
+      box-sizing:border-box; -webkit-box-sizing: border-box; -moz-box-sizing: border-box;  
+      padding: 0px;  
+ }  
+ span{  
+      position: absolute;  
+      font-size: 75px;  
+      font-family: 'Raleway', sans-serif;  
+      text-align: center;  
+      height: 75px;  
+      width: 75px;  
+      padding: 0px;  
+      margin: 5px;  
+      margin-left: -35px;  
+ }  
+ .top{border-top: none;}  
+ .bottom{border-bottom: none;}  
+ .left{border-left: none;}  
+ .right{border-right: none;}  
+ .alert{  
+      height: 125px;  
+      width : 150px;  
+      display: inline-block;  
+      background: #a024ff;  
+      position: relative;  
+      z-index: 7;  
+      margin-top: -50%;  
+      border-radius: 20px; -webkit-border-radius: 20px; -moz-border-radius: 20px;  
+      box-shadow: 0 0 75px 2px dimgray;  
+      animation: larger 0.5s; -webkit-animation: larger 0.5s; -moz-animation: larger 0.5s;  
+      animation-fill-mode: forwards; -webkit-animation-fill-mode: forwards; -moz-animation-fill-mode: forwards;  
+      box-sizing: content-box; -webkit-box-sizing: content-box; -moz-box-sizing: content-box;  
+      padding:30px;  
+      bottom: 50px;  
+      top: 0px;  
+ }  
+ @keyframes larger{ from{height: 75px; width: 125px;} to{height: 100px;width: 250px;}}  
+ @-webkit-keyframes larger{ from{height: 75px; width: 125px;} to{height: 100px;width: 250px;}}  
+ @-moz-keyframes larger{ from{height: 75px; width: 125px;} to{height: 100px;width: 250px;}}  
+ @-o-@keyframes larger{ from{height: 75px; width: 125px;} to{height: 100px;width: 250px;}}  
+ button{  
+      background: #ff42a1;  
+      border-radius: 2px; -webkit-border-radius: 2px; -moz-border-radius: 2px;  
+      color: #a024ff;  
+      border: none;  
+      outline: none;  
+ }  
+ button:focus{background: fuchsia;}  
+ .activeBox{background: fuchsia;}  
+</style>
+<!--<meta http-equiv="refresh" content="30">-->
+<!--<link rel="stylesheet" href="C:\Users\DELL\Downloads\tac.css">-->
+</head>
+<body>  
+<!--<script src="C:\Users\DELL\Downloads\toe.js">-->
+<script>
+var playerTurn, moves, isGameOver, span, restartButton;  
+ playerTurn = "x";  
+ moves = 0;  
+ isGameOver = false;  
+ span = document.getElementsByTagName("span");  
+ restartButton = '<button onclick="playAgain()"><svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-arrow-repeat" viewBox="0 0 16 16"><path d="M11.534 7h3.932a.25.25 0 0 1 .192.41l-1.966 2.36a.25.25 0 0 1-.384 0l-1.966-2.36a.25.25 0 0 1 .192-.41zm-11 2h3.932a.25.25 0 0 0 .192-.41L2.692 6.23a.25.25 0 0 0-.384 0L.342 8.59A.25.25 0 0 0 .534 9z"/><path fill-rule="evenodd" d="M8 3c-1.552 0-2.94.707-3.857 1.818a.5.5 0 1 1-.771-.636A6.002 6.002 0 0 1 13.917 7H12.9A5.002 5.002 0 0 0 8 3zM3.1 9a5.002 5.002 0 0 0 8.757 2.182.5.5 0 1 1 .771.636A6.002 6.002 0 0 1 2.083 9H3.1z"/></svg></button>';  
+ function play(y){  
+      if (y.dataset.player=="none" && window.isGameOver == false) {  
+           y.innerHTML = playerTurn;  
+           y.dataset.player = playerTurn;  
+           moves++;  
+           if (playerTurn=="x") {  
+                playerTurn="o";  
+           } else if (playerTurn=="o") {  
+                playerTurn="x"  
+           }  
+      }  
+      checkWinner(1,2,3);  
+      checkWinner(4,5,6);  
+      checkWinner(7,8,9);  
+      checkWinner(1,4,7);  
+      checkWinner(2,5,8);  
+      checkWinner(3,6,9);  
+      checkWinner(1,5,9);  
+      checkWinner(3,5,7);  
+      if (moves == 9 && isGameOver == false) {draw();}  
+ }  
+ function checkWinner(a, b, c) {  
+      a--; b--; c--;  
+      if (  
+           (span[a].dataset.player === span[b].dataset.player) &&  
+           (span[b].dataset.player === span[c].dataset.player) &&  
+           (span[a].dataset.player === span[c].dataset.player) &&  
+           ((span[a].dataset.player === "x") || span[a].dataset.player == "o")&&  
+           isGameOver == false  
+      ) {  
+           span[a].parentNode.className += " activeBox";  
+           span[b].parentNode.className += " activeBox";  
+           span[c].parentNode.className += " activeBox";  
+           gameOver(a);  
+      }  
+ }  
+ function playAgain(){  
+      document.getElementsByClassName("alert")[0].parentNode.removeChild(document.getElementsByClassName("alert")[0]);  
+      resetGame();  
+      window.isGameOver = false;  
+      for(var k =0; k<span.length; k++){  
+           span[k].parentNode.className= span[k].parentNode.className.replace("activeBox", "");//remove activebox class; you can use classlist.remove , but it doesn't support all browsers  
+      }  
+ }  
+ function resetGame(){  
+      for (i=0; i<span.length; i++){  
+           span[i].dataset.player = "none";  
+           span[i].innerHTML = "&nbsp;"  
+      }  
+      playerTurn = "x";  
+ }  
+ function gameOver(a){  
+      var gameOverAlertElement = "<b>GAME OVER</b><br><br> Player " + span[a].dataset.player.toUpperCase() + ' Win !!! <br><br>' + restartButton  
+      var div = document.createElement("div");  
+      div.className = "alert";  
+      div.innerHTML = gameOverAlertElement;  
+      document.getElementsByTagName("body")[0].appendChild(div);  
+      window.isGameOver = true;  
+      moves = 0;  
+ }  
+ function draw(){  
+      var drawAlertElement = '<b>DRAW!!!</b><br><br>' + restartButton;  
+      var div = document.createElement("div");  
+      div.className = "alert";  
+      div.innerHTML = drawAlertElement;  
+      document.getElementsByTagName("body")[0].appendChild(div);  
+      window.isGameOver = true;  
+      moves = 0;  
+ }  
+</script>
+      <h1><u><i> Tic Tac Toe</i></u> </h1>  
+      <div id="container">  
+           <div class="block">  
+                <div id="box1" class="box top left">  
+                     <span data-player="none" onclick="play(this)">&nbsp;</span>  
+                </div>  
+                <div id="box2" class="box top">  
+                     <span data-player="none" onclick="play(this)">&nbsp;</span>  
+                </div>  
+                <div id="box3" class="box top right">  
+                     <span data-player="none" onclick="play(this)">&nbsp;</span>  
+                </div>  
+           </div>  
+           <div class="block">  
+                <div id="box4" class="box left">  
+                     <span data-player="none" onclick="play(this)">&nbsp;</span>  
+                </div>  
+                <div id="box5" class="box">  
+                     <span data-player="none" onclick="play(this)">&nbsp;</span>  
+                </div>  
+                <div id="box6" class="box right">  
+                     <span data-player="none" onclick="play(this)">&nbsp;</span>  
+                </div>  
+           </div>  
+           <div class="block">  
+                <div id="box7" class="box left bottom">  
+                     <span data-player="none" onclick="play(this)">&nbsp;</span>  
+                </div>  
+                <div id="box8" class="box bottom">  
+                     <span data-player="none" onclick="play(this)">&nbsp;</span>  
+                </div>  
+                <div id="box9" class="box right bottom">  
+                     <span data-player="none" onclick="play(this)">&nbsp;</span>  
+                </div>  
+           </div>  
+      </div>  
+ </body>  
